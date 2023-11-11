@@ -1,58 +1,63 @@
-import { StatusBar } from 'expo-status-bar';
-import { useState } from 'react';
-import { Button, Linking, StyleSheet, Text, View } from 'react-native';
+import { StatusBar } from "expo-status-bar";
+import { useState } from "react";
+import { Button, Linking, StyleSheet, Text, View } from "react-native";
 
 export default function App() {
- const [name, setName] = useState('John Doe')
+  const [name, setName] = useState("John Doe");
   return (
-   <>
-    <View style={styles.body}>
-      <Text style={styles.text}>{name}</Text>
-      <View style={styles.button}>
-      <Button  title="Change Name" onPress={() => setName('Jane Doe')} />
+    <>
+      <View style={styles.body}>
+        <View style={styles.view1}>
+          <Text>{name}</Text>
+        </View>
+        <View style={styles.view2}>
+          <Text>{name}</Text>
+        </View>
+        <View style={styles.view3}>
+          <Text>{name}</Text>
+        </View>
       </View>
-    </View>
-   </>
+    </>
   );
 }
 
 const styles = StyleSheet.create({
-  body:{
-    backgroundColor: 'yellow',
-    borderColor: 'black',
-    borderWidth: 6,
-    borderRadius: 10,
-    // flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    height: '50%',
-    width: '100%'
+  body: {
+    marginTop: 50,
+    backgroundColor: "#fff",
+    alignItems: "center",
+    justifyContent: "space-between",
+    // height: "80%",
+    // width: "80%",
+    flex: 1,
+    // flexDirection: 'column',
+    flexDirection: "row",
   },
-  text:{
-    color: 'black',
-    fontStyle: 'italic',
-    fontSize: 30,
-    textTransform: 'uppercase',
+  view1: {
+    // width: 100,
+    // height: 100,
+    flex: 1,
+    backgroundColor: "red",
+    alignItems: "center",
+    justifyContent: "flex-start",
+    borderRadius: 50,
   },
-  button:{
-    width: '50%',
-    height: '50%',
-  }
+  view2: {
+    flex: 3,
+    // width: 100,
+    // height: 100,
+    backgroundColor: "blue",
+    alignItems: "center",
+    justifyContent: "center",
+    borderRadius: 50,
+  },
+  view3: {
+    flex: 2,
+    // width: 100,
+    // height: 100,
+    backgroundColor: "green",
+    alignItems: "center",
+    justifyContent: "center",
+    borderRadius: 50,
+  },
 });
-
-// Stylesheet have various methods to style the components
-// 1. StyleSheet.create() - This is the most common method to style the components
-// 2. StyleSheet.flatten() - This method is used to combine multiple styles into one
-// 3. StyleSheet.absoluteFillObject - This method is used to fill the entire screen with the component
-// 4. StyleSheet.hairlineWidth - This method is used to get the width of the hairline of the device
-// 5. StyleSheet.compose() - This method is used to combine multiple styles into one
-
-
-// Styles methods in React Native
-// 1: By inline styling
-// 2: By StyleSheet.create() method
-// 3: By StyleSheet.flatten() method
-// 4: By StyleSheet.absoluteFillObject method
-// 5: By StyleSheet.hairlineWidth method
-// 6: By StyleSheet.compose() method
-
