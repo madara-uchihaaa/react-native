@@ -4,11 +4,15 @@ import {
   Button,
   FlatList,
   Linking,
+  Pressable,
   RefreshControl,
   ScrollView,
   StyleSheet,
   Text,
   TextInput,
+  TouchableHighlight,
+  TouchableOpacity,
+  TouchableWithoutFeedback,
   View,
 } from "react-native";
 
@@ -26,6 +30,34 @@ export default function App() {
           secureTextEntry={true}
         />
         <Text style={styles.text}>Hello {name}</Text>
+        <Button
+          title="Open Google"
+          onPress={() => Linking.openURL("https://www.google.com")}
+          disabled
+        ></Button>
+        <TouchableOpacity
+          onPress={() => Linking.openURL("https://www.google.com")}
+          activeOpacity={0.3}
+        >
+          <Text style={styles.button}>Click Me</Text>
+        </TouchableOpacity>
+        <TouchableHighlight
+          onPress={() => Linking.openURL("https://www.google.com")}
+          activeOpacity={0.3}
+          underlayColor="red"
+        >
+          <Text style={styles.button}>Click Me Hi</Text>
+        </TouchableHighlight>
+        <TouchableWithoutFeedback
+          onPress={() => Linking.openURL("https://www.google.com")}
+        >
+          <Text style={styles.button}>Click Me Hi</Text>
+        </TouchableWithoutFeedback>
+        <Pressable
+        android_ripple={{color: 'pink'}}
+        onPress={() => Linking.openURL("https://www.google.com")}>
+          <Text style={styles.button}>Click Me Hi</Text>
+        </Pressable>
       </View>
     </>
   );
