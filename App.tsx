@@ -1,6 +1,7 @@
 import { StatusBar } from "expo-status-bar";
 import { useState } from "react";
 import {
+  Alert,
   Button,
   FlatList,
   Linking,
@@ -10,6 +11,7 @@ import {
   StyleSheet,
   Text,
   TextInput,
+  ToastAndroid,
   TouchableHighlight,
   TouchableOpacity,
   TouchableWithoutFeedback,
@@ -18,46 +20,40 @@ import {
 
 export default function App() {
   const [name, setName] = useState("");
+  
   return (
     <>
       <View style={styles.body}>
-        <Text style={styles.text}>Please enter your name</Text>
+        <Text style={styles.text}>Hello World!</Text>
         <TextInput
           style={styles.input}
           placeholder="Enter your name"
           onChangeText={(val) => setName(val)}
-          multiline
-          secureTextEntry={true}
         />
-        <Text style={styles.text}>Hello {name}</Text>
+        <Text style={styles.text}>{name ? `Your name is ${name}` : ""}</Text>
         <Button
-          title="Open Google"
-          onPress={() => Linking.openURL("https://www.google.com")}
-          disabled
-        ></Button>
-        <TouchableOpacity
-          onPress={() => Linking.openURL("https://www.google.com")}
-          activeOpacity={0.3}
-        >
-          <Text style={styles.button}>Click Me</Text>
-        </TouchableOpacity>
-        <TouchableHighlight
-          onPress={() => Linking.openURL("https://www.google.com")}
-          activeOpacity={0.3}
-          underlayColor="red"
-        >
-          <Text style={styles.button}>Click Me Hi</Text>
-        </TouchableHighlight>
-        <TouchableWithoutFeedback
-          onPress={() => Linking.openURL("https://www.google.com")}
-        >
-          <Text style={styles.button}>Click Me Hi</Text>
-        </TouchableWithoutFeedback>
-        <Pressable
-        android_ripple={{color: 'pink'}}
-        onPress={() => Linking.openURL("https://www.google.com")}>
-          <Text style={styles.button}>Click Me Hi</Text>
-        </Pressable>
+          title="Click Me"
+          onPress={() => {
+            Alert.alert(
+              "My Title",
+              "My Message",
+              [
+                {
+                  text: "Yes",
+                  onPress: () => console.warn("Yes"),
+                },
+                {
+                  text: "No",
+                  onPress: () => console.warn("No"),
+                },
+              ],
+              {
+                cancelable: true,
+                onDismiss: () => console.warn("Dismissed"),
+              }
+            );
+          }}
+        />
       </View>
     </>
   );
