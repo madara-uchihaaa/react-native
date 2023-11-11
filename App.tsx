@@ -1,6 +1,6 @@
 import { StatusBar } from "expo-status-bar";
 import { useState } from "react";
-import { Button, Linking, RefreshControl, ScrollView, StyleSheet, Text, View } from "react-native";
+import { Button, FlatList, Linking, RefreshControl, ScrollView, StyleSheet, Text, View } from "react-native";
 
 export default function App() {
   const [refreshing, setRefreshing] = useState(false);
@@ -20,9 +20,9 @@ export default function App() {
   ]);
   return (
     <>
-      <View style={styles.body}>
+      {/* <View style={styles.body}> */}
         {/* <ScrollView horizontal> */}
-        <ScrollView
+        {/* <ScrollView
         
         refreshControl={
           <RefreshControl
@@ -41,7 +41,7 @@ export default function App() {
             <Text>{item.text}</Text>
           </View>
         ))}
-        </ScrollView>
+        </ScrollView> */}
         {/* <View style={styles.item}>
           <Text>1</Text>
         </View>
@@ -53,7 +53,16 @@ export default function App() {
         </View> */}
 
         
-      </View>
+      {/* </View> */}
+      <FlatList 
+      data={items}
+      renderItem={({item}) => (
+        <View style={styles.item}>
+          <Text>{item.text} {item.id}</Text>
+        </View>
+      )}
+      />
+
     </>
   );
 }
@@ -72,3 +81,8 @@ const styles = StyleSheet.create({
     marginHorizontal: 16,
   },
 });
+// Similar to FlatList therse is also a SectionList
+// Different between FlatList and SectionList is that SectionList is used to display data in sections
+// and FlatList is used to display data in a list
+// SectionList is used to display data in sections
+// FlatList is used to display data in a list
