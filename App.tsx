@@ -2,7 +2,6 @@ import { StatusBar } from "expo-status-bar";
 import { useState } from "react";
 import {
   Alert,
-  Button,
   FlatList,
   Linking,
   Modal,
@@ -20,6 +19,7 @@ import {
   Image,
   ImageBackground,
 } from "react-native";
+import CustomBTN from "./components/Button";
 
 
 
@@ -32,27 +32,21 @@ export default function App() {
   }
   
   return (
-    <ImageBackground
-    style={{flex:1}}
-    source={{uri:'https://e1.pxfuel.com/desktop-wallpaper/96/635/desktop-wallpaper-best-one-piece-iphone-one-piece-iphone.jpg'}}>
+    <>
       <View style={styles.body}>
-       <Text style={styles.text}>Enter the Name of an animal</Text>
-       <TextInput
-        style={{ height: 40, borderColor: 'gray', borderWidth: 1 ,width: 200}}
-        onChangeText={text => setName(text)}
-        value={name}
-        />
-       {
-        isValidAnimal(name)? <Image
-        style={styles.img}
-        source={require('./assets/sucess.png')}
-        />: <Image
-        style={styles.img}
-        source={require('./assets/err.jpg')}
-        />
-       }
+
+      <CustomBTN
+        title="Press me 1"
+        styles={{  width: 200,justifyContent: "center", alignItems: "center"}}
+        onPress={() => Alert.alert("Simple Button pressed 1")}
+      />
+      <CustomBTN  
+        title="Press me 2"
+        styles={{  width: 200,justifyContent: "center", alignItems: "center"}}
+        onPress={() => Alert.alert("Simple Button pressed 2")}
+      />
       </View>
-      </ImageBackground>
+      </>
   );
 }
 
