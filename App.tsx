@@ -1,76 +1,63 @@
 import { StatusBar } from "expo-status-bar";
 import { useState } from "react";
-import {
-  Alert,
-  FlatList,
-  Linking,
-  Modal,
-  Pressable,
-  RefreshControl,
-  ScrollView,
-  StyleSheet,
-  Text,
-  TextInput,
-  ToastAndroid,
-  TouchableHighlight,
-  TouchableOpacity,
-  TouchableWithoutFeedback,
-  View,
-  Image,
-  ImageBackground,
-} from "react-native";
-import CustomBTN from "./components/Button";
+import { StyleSheet, View,Text, Button } from "react-native";
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+
+const Stack = createNativeStackNavigator();
 
 
-
-export default function App() {
-  const [name, setName] = useState("");
-
-  const isValidAnimal = (animal: string) => {
-    if(animal.length === 0) return false;
-    return ["dog", "cat", "bird"].includes(animal.toLowerCase());
-  }
-  
+function HomeScreen({ navigation}) {
   return (
-    <>
-      <View style={styles.body}>
-
-      <CustomBTN
-        title="Press me 1"
-        styles={{  width: 200,justifyContent: "center", alignItems: "center"}}
-        onPress={() => Alert.alert("Simple Button pressed 1")}
+    <View style={styles.container}>
+      <Text style={styles.text}>Home Screen</Text>
+      <Button
+        title="Go to Details"
+        onPress={() => navigation.navigate("Details")}
       />
-      <CustomBTN  
-        title="Press me 2"
-        styles={{  width: 200,justifyContent: "center", alignItems: "center"}}
-        onPress={() => Alert.alert("Simple Button pressed 2")}
-      />
-      </View>
-      </>
+    </View>
   );
 }
 
+function Details({ navigation}) {
+  return (
+    <View style={styles.container}>
+      <Text style={styles.text}>Details Screen</Text>
+      <Button
+        title="Go to Home"
+        onPress={() => navigation.push("Home")}
+      />
+    </View>
+  );
+}
+export default function App() {
+  return <>
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen
+        options={
+          {title: "Overview"}
+        }
+        name="Home" component={HomeScreen} />
+        <Stack.Screen
+        options={
+          {title: "Full Details"}
+        }
+        name="Details" component={Details} />
+      </Stack.Navigator>
+    </NavigationContainer>
+  </>;
+}
+
 const styles = StyleSheet.create({
-  body: {
+  container:{
     flex: 1,
-    marginTop: 50,
-    flexDirection: "column",
+    backgroundColor: "#fff",
     alignItems: "center",
+    justifyContent: "center",
   },
   text:{
     fontSize: 20,
-    fontWeight: "bold",
-    color: "red",
+    color: "darkslateblue",
   },
-  img:{
-    width: 200,
-    height: 200,
-    opacity: 0.5,
-  }
 });
-// U can also use url to get the image from the internet
-// <Image
-// style={styles.img}
-// source={{
-//   uri: 'https://reactnative.dev/img/tiny_logo.png',
-// }}
