@@ -5,6 +5,7 @@ import {
   Button,
   FlatList,
   Linking,
+  Modal,
   Pressable,
   RefreshControl,
   ScrollView,
@@ -16,73 +17,66 @@ import {
   TouchableOpacity,
   TouchableWithoutFeedback,
   View,
+  Image,
+  ImageBackground,
 } from "react-native";
+
+
 
 export default function App() {
   const [name, setName] = useState("");
+
+  const isValidAnimal = (animal: string) => {
+    if(animal.length === 0) return false;
+    return ["dog", "cat", "bird"].includes(animal.toLowerCase());
+  }
   
   return (
-    <>
+    <ImageBackground
+    style={{flex:1}}
+    source={{uri:'https://e1.pxfuel.com/desktop-wallpaper/96/635/desktop-wallpaper-best-one-piece-iphone-one-piece-iphone.jpg'}}>
       <View style={styles.body}>
-        <Text style={styles.text}>Hello World!</Text>
-        <TextInput
-          style={styles.input}
-          placeholder="Enter your name"
-          onChangeText={(val) => setName(val)}
+       <Text style={styles.text}>Enter the Name of an animal</Text>
+       <TextInput
+        style={{ height: 40, borderColor: 'gray', borderWidth: 1 ,width: 200}}
+        onChangeText={text => setName(text)}
+        value={name}
         />
-        <Text style={styles.text}>{name ? `Your name is ${name}` : ""}</Text>
-        <Button
-          title="Click Me"
-          onPress={() => {
-            Alert.alert(
-              "My Title",
-              "My Message",
-              [
-                {
-                  text: "Yes",
-                  onPress: () => console.warn("Yes"),
-                },
-                {
-                  text: "No",
-                  onPress: () => console.warn("No"),
-                },
-              ],
-              {
-                cancelable: true,
-                onDismiss: () => console.warn("Dismissed"),
-              }
-            );
-          }}
+       {
+        isValidAnimal(name)? <Image
+        style={styles.img}
+        source={require('./assets/sucess.png')}
+        />: <Image
+        style={styles.img}
+        source={require('./assets/err.jpg')}
         />
+       }
       </View>
-    </>
+      </ImageBackground>
   );
 }
 
 const styles = StyleSheet.create({
   body: {
     flex: 1,
-    marginTop: 30,
+    marginTop: 50,
     flexDirection: "column",
     alignItems: "center",
-    backgroundColor: "#fff",
   },
-  text: {
+  text:{
     fontSize: 20,
     fontWeight: "bold",
     color: "red",
   },
-  input: {
-    borderWidth: 1,
-    borderColor: "black",
-    padding: 10,
-    margin: 10,
-    textAlign: "center",
-    width: 300,
-  },
-  button: {
-    backgroundColor: "red",
-    padding: 10,
-    margin: 10,
-  },
+  img:{
+    width: 200,
+    height: 200,
+    opacity: 0.5,
+  }
 });
+// U can also use url to get the image from the internet
+// <Image
+// style={styles.img}
+// source={{
+//   uri: 'https://reactnative.dev/img/tiny_logo.png',
+// }}
