@@ -5,41 +5,28 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import HomeScreen from "./pages/Home";
 import Details from "./pages/Details";
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs'
-import { Ionicons } from '@expo/vector-icons';
-import FontAWS from "react-native-vector-icons/FontAwesome5";
+import {createDrawerNavigator} from "@react-navigation/drawer"
 
-const Tab = createBottomTabNavigator();
-
-const Stack = createNativeStackNavigator();
+const Drawer = createDrawerNavigator();
 
 export default function App() {
   return <>
     <NavigationContainer>
-      <Tab.Navigator
-      screenOptions={({route}) => ({
-        tabicon : ({focused, color, size}) => {
-          let iconName ="palette"
-          if(route.name === "Home"){
-            iconName = 'palette'
-          }else if(route.name === "Details"){
-            iconName = "wrench-simple"
-          }
-          return <FontAWS name={iconName} size={size} color={color} />
-        }
-      })}
-      >
-        <Tab.Screen
-        options={
-          {title: "Overview"}
-        }
-        name="Home" component={HomeScreen} />
-        <Tab.Screen
-        options={
-          {title: "Full Details"}
-        }
-        name="Details" component={Details} />
-      </Tab.Navigator>
+     <Drawer.Navigator
+     initialRouteName="Home"
+      screenOptions={{
+        headerStyle:{
+          backgroundColor: "darkslateblue",
+        },
+        headerTintColor: "#fff",
+        headerTitleStyle:{
+          fontWeight: "bold",
+        },
+      }}
+     >
+        <Drawer.Screen name="Home" component={HomeScreen}/>
+        <Drawer.Screen name="Details" component={Details}/>
+      </Drawer.Navigator>
     </NavigationContainer>
   </>;
 }
