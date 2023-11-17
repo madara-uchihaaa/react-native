@@ -2,31 +2,20 @@ import { StatusBar } from "expo-status-bar";
 import { useState } from "react";
 import { StyleSheet, View,Text, Button } from "react-native";
 import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import HomeScreen from "./pages/Home";
-import Details from "./pages/Details";
 import {createDrawerNavigator} from "@react-navigation/drawer"
+import Login from "./pages/Login";
 
-const Drawer = createDrawerNavigator();
+const Stack = createDrawerNavigator();
 
 export default function App() {
   return <>
     <NavigationContainer>
-     <Drawer.Navigator
-     initialRouteName="Home"
-      screenOptions={{
-        headerStyle:{
-          backgroundColor: "darkslateblue",
-        },
-        headerTintColor: "#fff",
-        headerTitleStyle:{
-          fontWeight: "bold",
-        },
-      }}
+     <Stack.Navigator
      >
-        <Drawer.Screen name="Home" component={HomeScreen}/>
-        <Drawer.Screen name="Details" component={Details}/>
-      </Drawer.Navigator>
+        <Stack.Screen name="Details" component={Login}/>
+        <Stack.Screen name="Home" component={HomeScreen}/>
+      </Stack.Navigator>
     </NavigationContainer>
   </>;
 }
