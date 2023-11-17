@@ -1,5 +1,4 @@
 import { Button, StyleSheet, Text, View } from "react-native";
-
 function Details({ navigation }) {
   return (
     <View style={styles.container}>
